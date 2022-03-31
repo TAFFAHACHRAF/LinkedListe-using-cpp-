@@ -43,20 +43,31 @@ class linkedListe{
 			node *temp;
 			temp=header;
 			int i=0;
-			while(temp->data){
+			while(temp!=NULL){
 				cout << "Data["<< i << "]=" << temp->data << "\n";
 				i++;
 				temp=temp->next;
 			}
+			cout << endl;
+		}
+		void remove_first(){
+			if(header != NULL){
+				node *temp=header;
+				header=header->next;
+				delete(temp);
+				size--;
+			}
 		}
 };
 int main(){
-	linkedListe *l=new linkedListe();
-	l->append(188);
-	l->append(1);
-	l->append(178);
-	l->append(888);
+	linkedListe l;
+	l.append(188);
+	l.append(1);
+	l.append(178);
+	l.append(888);
 	
-	l->toString();
+	l.remove_first();
+	
+	l.toString();
 	return 0;
 }
