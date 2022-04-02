@@ -95,6 +95,31 @@ class linkedListe{
 			return true;
 		}
 		
+		linkedListe *ConcatTwoLinkeListe(linkedListe *head1,linkedListe *head2){
+			if(head1->getSize()==0 && head2->getSize()==0){
+				return head1;
+			}
+			else if(head1->getSize()>0 && head2->getSize()==0){
+				return head1;
+			}
+			else if(head1->getSize()==0 && head2->getSize()>0){
+				return head2;
+			}
+			else{
+				node *temp1=head1->getHeader(),*temp2=head2->getHeader();
+				linkedListe *NewLinkListe=new linkedListe();
+	
+				while(temp1){
+					NewLinkListe->append(temp1->data);
+					temp1=temp1->next;
+				}
+				while(temp2){
+					NewLinkListe->append(temp2->data);
+					temp2=temp2->next;
+				}
+				return  NewLinkListe;
+			}
+		}
 int main(){
 	linkedListe *l=new linkedListe();
 	l->append(188);
@@ -113,5 +138,14 @@ int main(){
 	cout << campare_lists(l,l) <<endl;
 	l->toString();
 	y->toString();
+	linkedListe *a=new linkedListe();
+
+	
+	linkedListe *o=ConcatTwoLinkeListe(l,l);
+	o=ConcatTwoLinkeListe(o,o);
+	o=ConcatTwoLinkeListe(o,o);
+	o=ConcatTwoLinkeListe(o,o);
+	o->toString();
+	cout << o->getSize() <<endl;
 	return 0;
 }
