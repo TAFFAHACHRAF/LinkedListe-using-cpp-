@@ -24,6 +24,9 @@ class linkedListe{
 			tail=NULL;
 			size=0;
 		}
+		node *getHeader(){
+			return header;
+		}
 		int getSize(){
 			return size;
 		}
@@ -58,16 +61,57 @@ class linkedListe{
 				size--;
 			}
 		}
+		void remove_last(){
+			if(header->next == NULL){
+				remove_first();
+			}
+			else if(header != NULL){
+				node *cur=header;
+				node *prev;
+				while(cur->next != NULL){
+					prev=cur;
+					cur=cur->next;
+				}
+				tail=prev;
+				prev->next=NULL;
+				delete cur;
+				size--;
+			}
+		}
 };
+		bool campare_lists(linkedListe *head1,linkedListe *head2){
+			node *temp1=head1->getHeader(),*temp2=head2->getHeader();
+			while(temp1 && temp2){
+				if(temp1->data != temp2->data){
+					delete temp1;
+					delete temp2;
+					return false;
+				}
+				temp1=temp1->next;
+				temp2=temp2->next;
+			}
+			delete temp1;
+			delete temp2;
+			return true;
+		}
+		
 int main(){
-	linkedListe l;
-	l.append(188);
-	l.append(1);
-	l.append(178);
-	l.append(888);
+	linkedListe *l=new linkedListe();
+	l->append(188);
+	l->append(1);
+	l->append(178);
+	l->append(888);
 	
-	l.remove_first();
+	linkedListe *y=new linkedListe();
+	y->append(188);
+	y->append(1);
 	
-	l.toString();
+	l->remove_first();
+	l->remove_last();
+	
+	l->toString();
+	cout << campare_lists(l,l) <<endl;
+	l->toString();
+	y->toString();
 	return 0;
 }
