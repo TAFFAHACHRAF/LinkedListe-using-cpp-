@@ -27,6 +27,9 @@ class linkedListe{
 		node *getHeader(){
 			return header;
 		}
+		void setHeader(node *llist){
+			this->header=llist;
+		}
 		int getSize(){
 			return size;
 		}
@@ -120,12 +123,39 @@ class linkedListe{
 				return  NewLinkListe;
 			}
 		}
+		
+		node *reverseList(node *llist){
+			if(llist==NULL || llist->next==NULL)
+				return llist;
+			node* cur=llist;
+			node *next,*prev=NULL;
+			
+			while(cur != NULL){
+				next=cur->next;
+				cur->next=prev;
+				prev=cur;
+				cur=next;
+			}
+			return prev;
+		}
 int main(){
 	linkedListe *l=new linkedListe();
-	l->append(188);
+	l->append(0);
 	l->append(1);
-	l->append(178);
-	l->append(888);
+	l->append(2);
+	l->append(48);
+	l->append(48);
+	l->append(48);
+	l->append(9845);
+	l->append(798);
+	l->append(9856);
+	l->append(848);
+	l->append(652);
+	l->append(854);
+	l->append(48);
+	l->append(120);
+	l->append(48);
+	l->append(74);
 	
 	linkedListe *y=new linkedListe();
 	y->append(188);
@@ -139,6 +169,8 @@ int main(){
 	l->toString();
 	y->toString();
 	linkedListe *a=new linkedListe();
+	a->append(17);
+	a->append(120);
 
 	
 	linkedListe *o=ConcatTwoLinkeListe(l,l);
@@ -147,5 +179,10 @@ int main(){
 	o=ConcatTwoLinkeListe(o,o);
 	o->toString();
 	cout << o->getSize() <<endl;
+	cout << "before";
+	a->toString();
+	cout << "after";
+	a->setHeader(reverseList(a->getHeader()));
+	a->toString();
 	return 0;
 }
